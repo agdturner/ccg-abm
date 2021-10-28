@@ -25,6 +25,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -76,7 +77,17 @@ public class GUI {
      * A panel for the animation.
      */
     private Animation animation;
-
+    
+    /**
+     * For increasing the size of the pixel on the screen.
+     */
+    private int multiplier = 4;
+    
+    /**
+     * Create a new instance.
+     * 
+     * @param model A reference to the model. 
+     */
     public GUI(Model model) {
         this.model = model;
         environmentInitialised = false;
@@ -120,6 +131,14 @@ public class GUI {
         });
     }
 
+    static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+        Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
+        BufferedImage bufferedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        bufferedImage.getGraphics()
+            .drawImage(resultingImage, 0, 0, null);
+        return bufferedImage;
+    }
+    
     /**
      * A JPanel for storing and presenting the model animation.
      */
@@ -182,13 +201,15 @@ public class GUI {
         @Override
         public Dimension getPreferredSize() {
             if (environmentInitialised) {
-                int w = model.parameters.ncols + getInsets().left + getInsets().right;
-                int h = model.parameters.nrows + getInsets().top + getInsets().bottom;
+                int w = ((model.parameters.ncols * multiplier) + getInsets().left + getInsets().right);
+                int h = ((model.parameters.nrows * multiplier) + getInsets().top + getInsets().bottom);
                 return new Dimension(w, h);
             } else {
                 return new Dimension(500, 500);
             }
         }
+        
+        
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -202,11 +223,11 @@ public class GUI {
                     Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (image != null) {
-                    g2d.drawImage(image, 0, 0, model.parameters.ncols, model.parameters.nrows, frame);
+                    g2d.drawImage(image, 0, 0, model.parameters.ncols * multiplier, model.parameters.nrows * multiplier, frame);
                 }
                 for (Grazer gr : model.environment.grazers) {
                     g2d.setColor(Color.GREEN);
-                    g2d.fillOval(gr.getCol() - 1, gr.getRow() - 1, 2, 2);
+                    g2d.drawOval((gr.getCol() - 1) * multiplier, (gr.getRow() - 1) * multiplier, 2, 2);
                     g2d.setColor(Color.BLACK);
                 }
             }

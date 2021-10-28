@@ -18,6 +18,7 @@ package uk.ac.leeds.ccg.abm;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -214,6 +215,8 @@ public class Environment {
         MemoryImageSource m = new MemoryImageSource(ncols, nrows, pix, 0, ncols);
         Panel panel = new Panel();
         Image image = panel.createImage(m);
+        //image = image.getScaledInstance(multiplier * 100, multiplier * 100, Image.SCALE_DEFAULT);
+        
         return image;
     }
 
