@@ -41,12 +41,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ccg-io.version>1.1.0</ccg-io.version>
-        <agdt-java-data.version>0.3</agdt-java-data.version>
-        <ccg-grids.version>2.1-SNAPSHOT</ccg-grids.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <junit.version>5.7.2</junit.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -54,30 +50,30 @@
         <dependency>
             <groupId>io.github.agdturner</groupId>
             <artifactId>ccg-io</artifactId>
-            <version>${ccg-io.version}</version>
+            <version>1.1.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.github.agdturner/agdt-java-data -->
         <dependency>
             <groupId>io.github.agdturner</groupId>
-            <artifactId>agdt-java-data</artifactId>
-            <version>${agdt-java-data.version}</version>
+            <artifactId>ccg-data</artifactId>
+            <version>0.3.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.github.agdturner/agdt-java-grids -->
         <dependency>
             <groupId>io.github.agdturner</groupId>
             <artifactId>ccg-grids</artifactId>
-            <version>${ccg-grids.version}</version>
+            <version>2.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
+            <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -95,7 +91,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <compilerArgs>
                         <arg>-verbose</arg>
@@ -106,18 +102,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
-                <!--
-                <version>2.22.2</version>
-                -->
+                <version>3.0.0-M7</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M4</version>
-                <!--
-                <version>2.22.2</version>
-                -->
+                <version>3.0.0-M7</version>
             </plugin>
         </plugins>
     </build>
@@ -130,7 +120,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
+                        <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -141,7 +131,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.8.1</version>
+                        <version>3.10.1</version>
                         <configuration>
                             <compilerArgs>
                                 <arg>-verbose</arg>
@@ -152,23 +142,17 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <!--
-                        <version>2.22.2</version>
-                        -->
+                        <version>3.0.0-M7</version>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <!--
-                        <version>2.22.2</version>
-                        -->
+                        <version>3.0.0-M7</version>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.2.1</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -181,7 +165,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.4.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -194,7 +178,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

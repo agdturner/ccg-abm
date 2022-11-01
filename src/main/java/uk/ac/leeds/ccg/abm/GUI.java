@@ -15,6 +15,7 @@
  */
 package uk.ac.leeds.ccg.abm;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -25,6 +26,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,16 +79,16 @@ public class GUI {
      * A panel for the animation.
      */
     private Animation animation;
-    
+
     /**
      * For increasing the size of the pixel on the screen.
      */
     private int multiplier = 4;
-    
+
     /**
      * Create a new instance.
-     * 
-     * @param model A reference to the model. 
+     *
+     * @param model A reference to the model.
      */
     public GUI(Model model) {
         this.model = model;
@@ -135,14 +137,15 @@ public class GUI {
         Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
         BufferedImage bufferedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
         bufferedImage.getGraphics()
-            .drawImage(resultingImage, 0, 0, null);
+                .drawImage(resultingImage, 0, 0, null);
         return bufferedImage;
     }
-    
+
     /**
      * A JPanel for storing and presenting the model animation.
      */
-    class Animation extends JPanel {
+    class Animation extends Canvas {
+        //class Animation extends JPanel {
 
         private static final long serialVersionUID = 1L;
 
@@ -192,7 +195,8 @@ public class GUI {
                         return;
                     }
                     //repaint();
-                    paintComponent(getGraphics());
+                    //paintComponent(getGraphics());
+                    render(getGraphics()); // Alternative using Canvas in place of JPanel
                 });
                 timer.start();
             }
@@ -201,18 +205,26 @@ public class GUI {
         @Override
         public Dimension getPreferredSize() {
             if (environmentInitialised) {
-                int w = ((model.parameters.ncols * multiplier) + getInsets().left + getInsets().right);
-                int h = ((model.parameters.nrows * multiplier) + getInsets().top + getInsets().bottom);
+                int w = (model.parameters.ncols * multiplier) + frame.getInsets().left + frame.getInsets().right;
+                int h = (model.parameters.nrows * multiplier) + frame.getInsets().top + frame.getInsets().bottom;
+                //int w = (model.parameters.ncols * multiplier) + getInsets().left + getInsets().right;
+                //int h = (model.parameters.nrows * multiplier) + getInsets().top + getInsets().bottom;
                 return new Dimension(w, h);
             } else {
                 return new Dimension(500, 500);
             }
         }
-        
-        
 
-        @Override
-        protected void paintComponent(Graphics g) {
+//        @Override
+//        protected void paintComponent(Graphics g) {
+// Alternative using Canvas in place of JPanel.
+        private void render(Graphics g) {
+
+            /**
+             * Set the background to be black.
+             */
+            g.setColor(Color.BLACK);
+
             //super.paintComponents(g);
             Graphics2D g2d = (Graphics2D) g.create();
             if (environmentInitialised) {
@@ -337,7 +349,7 @@ public class GUI {
                 }
             } else if (evt.getSource().equals(nrowsSLT.s)) {
                 int i0 = model.parameters.nrows;
-                int i = check(nrowsSLT.s, nrowsSLT.t, 
+                int i = check(nrowsSLT.s, nrowsSLT.t,
                         nrowsSLT.s.getValue(),
                         model.parameterConstraints.minNrows,
                         model.parameterConstraints.maxNrows,
@@ -349,7 +361,7 @@ public class GUI {
                 }
             } else if (evt.getSource().equals(ncolsSLT.s)) {
                 int i0 = model.parameters.ncols;
-                int i = check(ncolsSLT.s, ncolsSLT.t, 
+                int i = check(ncolsSLT.s, ncolsSLT.t,
                         ncolsSLT.s.getValue(),
                         model.parameterConstraints.minNcols,
                         model.parameterConstraints.maxNcols,
@@ -366,7 +378,7 @@ public class GUI {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(iSLT.t)) {
                 int i0 = model.parameters.nIterations;
-                int i = check(iSLT.s, iSLT.t, 
+                int i = check(iSLT.s, iSLT.t,
                         Integer.valueOf(iSLT.t.getText()),
                         model.parameterConstraints.minNIterations,
                         model.parameterConstraints.maxNIterations,
@@ -378,7 +390,7 @@ public class GUI {
                 }
             } else if (e.getSource().equals(gSLT.t)) {
                 int i0 = model.parameters.initialNGrazers;
-                int i = check(gSLT.s, gSLT.t, 
+                int i = check(gSLT.s, gSLT.t,
                         Integer.valueOf(gSLT.t.getText()),
                         model.parameterConstraints.minInitialNGrazers,
                         model.parameterConstraints.maxInitialNGrazers,
@@ -390,7 +402,7 @@ public class GUI {
                 }
             } else if (e.getSource().equals(nrowsSLT.t)) {
                 int i0 = model.parameters.nrows;
-                int i = check(nrowsSLT.s, nrowsSLT.t, 
+                int i = check(nrowsSLT.s, nrowsSLT.t,
                         Integer.valueOf(nrowsSLT.t.getText()),
                         model.parameterConstraints.minNrows,
                         model.parameterConstraints.maxNrows,
@@ -402,7 +414,7 @@ public class GUI {
                 }
             } else if (e.getSource().equals(ncolsSLT.t)) {
                 int i0 = model.parameters.initialNGrazers;
-                int i = check(ncolsSLT.s, ncolsSLT.t, 
+                int i = check(ncolsSLT.s, ncolsSLT.t,
                         Integer.valueOf(ncolsSLT.t.getText()),
                         model.parameterConstraints.minNcols,
                         model.parameterConstraints.maxNcols,
@@ -567,4 +579,7 @@ public class GUI {
         t.setText(Integer.toString(i));
         return i;
     }
+
+    
+
 }
