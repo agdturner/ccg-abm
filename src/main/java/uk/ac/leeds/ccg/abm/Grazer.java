@@ -53,8 +53,6 @@ public class Grazer extends Agent {
      * Randomly set {@link #size} to a number in the range [minSize, maxSize).
      *
      * @param environment What {@link #environment} is set to.
-     * @param grazers What {@link #grazers} is set to.
-     * @param random What {@link #random} is set to.
      * @param row The initial row location of the new grazer.
      * @param col The initial col location of the new grazer.
      * @param minSize What {@link #minSize} is set to.
@@ -71,7 +69,6 @@ public class Grazer extends Agent {
      * Randomly set {@link #store} to a number in the range [size/2, size).
      *
      * @param environment What {@link #environment} is set to.
-     * @param random What {@link #random} is set to.
      * @param x What {@link #x} is set to.
      * @param y What {@link #y} is set to.
      * @param minSize What {@link #minSize} is set to.
@@ -88,7 +85,6 @@ public class Grazer extends Agent {
      * Create a new instance.
      *
      * @param environment What {@link #environment} is set to.
-     * @param grazers What {@link #grazers} is set to.
      * @param x What {@link #x} is set to.
      * @param y What {@link #y} is set to.
      * @param minSize What {@link #minSize} is set to.

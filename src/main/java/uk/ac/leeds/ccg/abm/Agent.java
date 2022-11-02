@@ -48,14 +48,14 @@ public class Agent {
     }
 
     /**
-     * @return {@link #col}
+     * @return col
      */
     public int getCol() {
         return (int) environment.vegetation.getCellID(x, y).getCol();
     }
 
     /**
-     * @return {@link #row}
+     * @return row
      */
     public int getRow() {
         return (int) environment.vegetation.getCellID(x, y).getRow();

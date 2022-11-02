@@ -9,7 +9,7 @@
 
     <name>ccg-abm</name>
     <url>https://github.com/agdturner/ccg-abm</url>
-    <description>Java Agent Based Model.</description>
+    <description>Agent Based Model</description>
     <scm>
         <url>git@github.com:agdturner/ccg-abm.git</url>
         <connection>scm:git:git@github.com:agdturner/ccg-abm.git</connection>

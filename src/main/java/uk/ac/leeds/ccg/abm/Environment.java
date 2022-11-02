@@ -18,7 +18,6 @@ package uk.ac.leeds.ccg.abm;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Panel;
-import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -105,13 +104,8 @@ public class Environment {
     /**
      * Create a new instance.
      *
-     * @param randomSeed Used for setting the seed of {@link #random}.
-     * @param nrows What {@link #nrows} is set to.
-     * @param ncols What {@link #ncols} is set to.
-     * @param factory The factory for creating the vegetation.
-     * @param maxInitialVegetation The maximum initial vegetation for any cell.
-     * @param initialNGrazers The initial number of grazers.
-     * @throws Exception If encountered.
+     * @param parameters Parameters.
+     * @param factory Grids_GridIntFactory.
      */
     public Environment(Parameters parameters, Grids_GridIntFactory factory) {
         this.parameters = parameters;
@@ -197,7 +191,9 @@ public class Environment {
     /**
      * Gets current data as an image.
      *
-     * @return {@link #data} as an Image. This may return {@code null}.
+     * @return {@link #get1DRescaledData(int, int)} as an Image. This may return
+     * {@code null}.
+     * @throws Exception If encountered.
      */
     public Image getDataAsImage() throws Exception {
         if (vegetation == null) {

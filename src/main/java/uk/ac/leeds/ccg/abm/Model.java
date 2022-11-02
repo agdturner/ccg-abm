@@ -89,7 +89,6 @@ public class Model implements Serializable {
     }
 
     /**
-     * @param args The command line arguments:
      * <ul>
      * <li>int randomSeed</li>
      * <li>int nIterations</li>
@@ -241,6 +240,15 @@ public class Model implements Serializable {
 
         /**
          * Create a new instance.
+         *
+         * @param randomSeed What {@link #randomSeed} is set to.
+         * @param nIterations What {@link #nIterations} is set to.
+         * @param initialMaxVegetation What {@link #initialMaxVegetation} is set to.
+         * @param initialNGrazers What {@link #initialNGrazers} is set to.
+         * @param nrows What {@link #nrows} is set to.
+         * @param ncols What {@link #ncols} is set to.
+         * @param maxSize What {@link #maxSizeGrazer} is set to.
+         * @param minSize What {@link #minSizeGrazer} is set to.
          */
         public Parameters(int randomSeed, int nIterations, int initialMaxVegetation,
                 int initialNGrazers, int nrows, int ncols, int maxSize, int minSize) {

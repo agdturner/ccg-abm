@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+/**
+ * Module for Agent Based Modelling
+ */
 module uk.ac.leeds.ccg.abm {
     //requires transitive java.logging;
     //requires transitive java.desktop;
